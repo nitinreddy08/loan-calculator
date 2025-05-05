@@ -5,18 +5,21 @@ import About from "./pages/About";
 import ExchangeRates from "./pages/ExchangeRates";
 import NotFound from "./pages/NotFound";
 import Header from "./components/Header";
+import { ThemeContextProvider } from "./context/ThemeContext";
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/exchange-rates" element={<ExchangeRates />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <ThemeContextProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/exchange-rates" element={<ExchangeRates />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </ThemeContextProvider>
   );
 }
 
