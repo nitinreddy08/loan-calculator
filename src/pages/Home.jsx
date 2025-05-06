@@ -89,7 +89,7 @@ function Home() {
     >
       <Container maxWidth="lg">
         <Typography variant="h3" gutterBottom align="center">
-          Loan EMI Calculator Dashboard
+          Loan EMI Calculator
         </Typography>
 
         <Grid container spacing={3} justifyContent="center">
