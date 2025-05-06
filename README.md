@@ -33,38 +33,50 @@ To make the app available online, you can deploy it using Vercel.
 2.Vercel will handle the deployment automatically.
 
 
-### ### Documentation
+## Documentation
 The app is designed to fetch live exchange rates from the ExchangeRate API and display them in a clean and user-friendly interface. It is built using React, Material UI, Context API, Axios, and deployed using Vercel.
 
 ### 1. Technologies Used
-\.React: The app is built using React, which is a powerful JavaScript library for building user interfaces. React allowed me to create a dynamic and responsive web app that updates in real-time when the exchange rates are fetched from the API.
+#### React: 
+The app is built using React, which is a powerful JavaScript library for building user interfaces. React allowed me to create a dynamic and responsive web app that updates in real-time when the exchange rates are fetched from the API.
 
-\.Material UI: For styling and layout, I used Material UI to make the app look modern and professional. It provides a set of pre-styled components that are easy to integrate and use in React applications.
+#### Material UI: 
+For styling and layout, I used Material UI to make the app look modern and professional. It provides a set of pre-styled components that are easy to integrate and use in React applications.
 
-\.Context API: I used Context API for state management to pass down data, such as the selected currency and theme (light/dark mode) across the app without needing to pass props at each level.
+#### Context API: 
+I used Context API for state management to pass down data, such as the selected currency and theme (light/dark mode) across the app without needing to pass props at each level.
 
-\.Axios: Axios was used to make HTTP requests to the ExchangeRate API. It allowed me to easily fetch exchange rate data from the API and manage the responses efficiently.
+#### Axios: 
+Axios was used to make HTTP requests to the ExchangeRate API. It allowed me to easily fetch exchange rate data from the API and manage the responses efficiently.
 
-\.GitHub: I used GitHub for version control, allowing me to keep track of changes and collaborate effectively.
+#### GitHub: 
+I used GitHub for version control, allowing me to keep track of changes and collaborate effectively.
 
-\.Vercel: Finally, I deployed the app using Vercel, which made the deployment process smooth and straightforward.
+#### Vercel: 
+Finally, I deployed the app using Vercel, which made the deployment process smooth and straightforward.
 
-### 2. Features
-\.Currency Conversion: The app allows users to convert the amount from one currency to another by selecting the base and target currencies.
+#### 2. Features
+#### Currency Conversion:
+The app allows users to convert the amount from one currency to another by selecting the base and target currencies.
 
-\.Live Exchange Rates: The app fetches real-time exchange rates from the ExchangeRate API and displays them to users.
+#### Live Exchange Rates: 
+The app fetches real-time exchange rates from the ExchangeRate API and displays them to users.
 
-\.Responsive Design: The app is fully responsive, ensuring it works well on both desktop and mobile devices.
+#### Responsive Design: 
+The app is fully responsive, ensuring it works well on both desktop and mobile devices.
 
-\.Theme Toggle: I implemented a light/dark theme toggle, which allows users to switch between light and dark modes for better user experience.
+#### Theme Toggle: 
+I implemented a light/dark theme toggle, which allows users to switch between light and dark modes for better user experience.
 
 ### 3. Challenges Faced
 One of the major challenges I faced during the development of this project was learning and working with Material UI. I had never used Material UI before, and I was not completely familiar with its components, styling conventions, or customization options. The steep learning curve of understanding how to integrate Material UI with React was something I had to work through. However, with some research and practice, I was able to successfully integrate Material UI to build the user interface.
 
 ### 4. Learning and Improvement
-\. Material UI: I took time to explore the official Material UI documentation, watched tutorials, and experimented with different components to get a good understanding of how it works. I learned how to use its components like Buttons, TextFields, Cards, and AppBar to create a clean and modern interface.
+#### Material UI: 
+I took time to explore the official Material UI documentation, watched tutorials, and experimented with different components to get a good understanding of how it works. I learned how to use its components like Buttons, TextFields, Cards, and AppBar to create a clean and modern interface.
 
-\.API Integration: I gained hands-on experience with integrating third-party APIs into a React app using Axios. This was a valuable skill for real-time data fetching and handling API responses.
+#### API Integration: 
+I gained hands-on experience with integrating third-party APIs into a React app using Axios. This was a valuable skill for real-time data fetching and handling API responses.
 
 ### 5. Deployment
 I deployed the app using Vercel, which is an easy and reliable platform for React apps. Vercel allows for automatic deployment from GitHub, and I was able to get the app online with minimal setup.
