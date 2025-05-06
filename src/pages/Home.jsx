@@ -5,6 +5,9 @@ import {
   TextField,
   Button,
   Grid,
+  useTheme,
+  useMediaQuery,
+  Paper,
 } from "@mui/material";
 import { useState } from "react";
 import useExchangeRates from "../hooks/useExchangeRates";
@@ -18,6 +21,9 @@ function Home() {
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
 
   const { rates, loading, error } = useExchangeRates();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const currencySymbols = {
     USD: "$",
@@ -84,107 +90,144 @@ function Home() {
         bgcolor: "background.default",
         color: "text.primary",
         minHeight: "100vh",
-        padding: 4,
+        padding: { xs: 2, sm: 3, md: 4 },
+        paddingBottom: isMobile ? '72px' : '32px', // Add bottom padding for mobile to account for navigation
       }}
     >
       <Container maxWidth="lg">
-        <Typography variant="h3" gutterBottom align="center">
+        <Typography 
+          variant={isMobile ? "h4" : "h3"} 
+          gutterBottom 
+          align="center"
+          sx={{ 
+            mb: { xs: 2, md: 4 },
+            fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem' }
+          }}
+        >
           Loan EMI Calculator
         </Typography>
 
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} md={4}>
-            <TextField
-              label="Loan Amount"
-              fullWidth
-              value={principal}
-              onChange={(e) => setPrincipal(e.target.value)}
-              type="number"
-              variant="outlined"
-            />
-          </Grid>
+        <Paper 
+          elevation={2} 
+          sx={{ 
+            p: { xs: 2, sm: 3, md: 4 },
+            borderRadius: 2,
+            mb: 4
+          }}
+        >
+          <Grid container spacing={isMobile ? 2 : 3} justifyContent="center">
+            <Grid item xs={12} md={4}>
+              <TextField
+                label="Loan Amount"
+                fullWidth
+                value={principal}
+                onChange={(e) => setPrincipal(e.target.value)}
+                type="number"
+                variant="outlined"
+                size={isMobile ? "small" : "medium"}
+                margin={isMobile ? "dense" : "normal"}
+              />
+            </Grid>
 
-          <Grid item xs={12} md={4}>
-            <TextField
-              label="Interest Rate (%)"
-              fullWidth
-              value={rate}
-              onChange={(e) => setRate(e.target.value)}
-              type="number"
-              variant="outlined"
-            />
-          </Grid>
+            <Grid item xs={12} md={4}>
+              <TextField
+                label="Interest Rate (%)"
+                fullWidth
+                value={rate}
+                onChange={(e) => setRate(e.target.value)}
+                type="number"
+                variant="outlined"
+                size={isMobile ? "small" : "medium"}
+                margin={isMobile ? "dense" : "normal"}
+              />
+            </Grid>
 
-          <Grid item xs={12} md={4}>
-            <TextField
-              label="Term (Years)"
-              fullWidth
-              value={years}
-              onChange={(e) => setYears(e.target.value)}
-              type="number"
-              variant="outlined"
-            />
-          </Grid>
+            <Grid item xs={12} md={4}>
+              <TextField
+                label="Term (Years)"
+                fullWidth
+                value={years}
+                onChange={(e) => setYears(e.target.value)}
+                type="number"
+                variant="outlined"
+                size={isMobile ? "small" : "medium"}
+                margin={isMobile ? "dense" : "normal"}
+              />
+            </Grid>
 
-          <Grid item xs={12} textAlign="center">
-            <Button
-              variant="contained"
-              onClick={calculateEMI}
-              size="large"
-              sx={{ mt: 1 }}
-            >
-              Calculate
-            </Button>
+            <Grid item xs={12} textAlign="center">
+              <Button
+                variant="contained"
+                onClick={calculateEMI}
+                size={isMobile ? "medium" : "large"}
+                sx={{ mt: { xs: 1, md: 2 } }}
+              >
+                Calculate
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
 
         {emi && (
-          <>
+          <Paper 
+            elevation={2} 
+            sx={{ 
+              p: { xs: 2, sm: 3, md: 4 },
+              borderRadius: 2,
+              mb: 4
+            }}
+          >
             <Typography
-              variant="h5"
+              variant={isMobile ? "h6" : "h5"}
               sx={{
-                mt: 4,
                 textAlign: "center",
                 fontWeight: "bold",
                 letterSpacing: 1,
+                mb: 3
               }}
             >
               Monthly EMI: {currencySymbols[selectedCurrency]}
               {convertAmount(emi)}
             </Typography>
 
-            <Grid item xs={12} sx={{ mt: 3 }}>
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                flexWrap="wrap"
-                gap={2}
+            <Box
+              display="flex"
+              justifyContent={isMobile ? "center" : "space-between"}
+              flexDirection={isMobile ? "column" : "row"}
+              alignItems={isMobile ? "center" : "flex-start"}
+              gap={2}
+            >
+              <TextField
+                select
+                label="Currency"
+                value={selectedCurrency}
+                onChange={(e) => setSelectedCurrency(e.target.value)}
+                SelectProps={{ native: true }}
+                size={isMobile ? "small" : "medium"}
+                sx={{ 
+                  minWidth: isMobile ? "100%" : 200,
+                  mb: isMobile ? 1 : 0
+                }}
               >
-                <TextField
-                  select
-                  label="Currency"
-                  value={selectedCurrency}
-                  onChange={(e) => setSelectedCurrency(e.target.value)}
-                  SelectProps={{ native: true }}
-                  sx={{ minWidth: 200 }}
-                >
-                  {Object.keys(currencySymbols).map((currency) => (
-                    <option key={currency} value={currency}>
-                      {currency}
-                    </option>
-                  ))}
-                </TextField>
+                {Object.keys(currencySymbols).map((currency) => (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                ))}
+              </TextField>
 
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={resetTable}
-                >
-                  Reset Table
-                </Button>
-              </Box>
-            </Grid>
-          </>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={resetTable}
+                sx={{ 
+                  width: isMobile ? "100%" : "auto"
+                }}
+              >
+                Reset Table
+              </Button>
+            </Box>
+          </Paper>
         )}
 
         {loading && (
@@ -197,16 +240,26 @@ function Home() {
         )}
 
         {schedule.length > 0 && (
-          <Box sx={{ mt: 5 }}>
-            <Typography variant="h5" gutterBottom>
+          <Paper 
+            elevation={2} 
+            sx={{ 
+              mt: 3,
+              p: { xs: 1, sm: 2, md: 3 },
+              borderRadius: 2
+            }}
+          >
+            <Typography 
+              variant={isMobile ? "h6" : "h5"} 
+              gutterBottom
+              sx={{ p: { xs: 1, sm: 2 } }}
+            >
               Amortization Schedule ({selectedCurrency})
             </Typography>
             <Box
               sx={{
                 overflowX: "auto",
                 bgcolor: "background.paper",
-                p: 2,
-                borderRadius: 2,
+                borderRadius: 1,
               }}
             >
               <table
@@ -215,6 +268,7 @@ function Home() {
                   borderCollapse: "separate",
                   borderSpacing: "0",
                   textAlign: "center",
+                  minWidth: isMobile ? "500px" : "100%", // Ensure horizontal scrolling works on mobile
                 }}
               >
                 <thead
@@ -224,16 +278,16 @@ function Home() {
                   }}
                 >
                   <tr>
-                    <th style={{ padding: "10px", border: "1px solid #ccc" }}>
+                    <th style={{ padding: isMobile ? "8px" : "10px", border: "1px solid #ccc" }}>
                       Month
                     </th>
-                    <th style={{ padding: "10px", border: "1px solid #ccc" }}>
+                    <th style={{ padding: isMobile ? "8px" : "10px", border: "1px solid #ccc" }}>
                       Principal
                     </th>
-                    <th style={{ padding: "10px", border: "1px solid #ccc" }}>
+                    <th style={{ padding: isMobile ? "8px" : "10px", border: "1px solid #ccc" }}>
                       Interest
                     </th>
-                    <th style={{ padding: "10px", border: "1px solid #ccc" }}>
+                    <th style={{ padding: isMobile ? "8px" : "10px", border: "1px solid #ccc" }}>
                       Remaining Balance
                     </th>
                   </tr>
@@ -264,21 +318,34 @@ function Home() {
                     >
                       <td
                         style={{
-                          padding: "10px",
+                          padding: isMobile ? "6px" : "10px",
                           border: "1px solid #ccc",
+                          fontSize: isMobile ? "0.8rem" : "inherit"
                         }}
                       >
                         {row.month}
                       </td>
-                      <td style={{ padding: "10px", border: "1px solid #ccc" }}>
+                      <td style={{ 
+                        padding: isMobile ? "6px" : "10px", 
+                        border: "1px solid #ccc",
+                        fontSize: isMobile ? "0.8rem" : "inherit"
+                      }}>
                         {currencySymbols[selectedCurrency]}{" "}
                         {convertAmount(row.principalPayment)}
                       </td>
-                      <td style={{ padding: "10px", border: "1px solid #ccc" }}>
+                      <td style={{ 
+                        padding: isMobile ? "6px" : "10px", 
+                        border: "1px solid #ccc",
+                        fontSize: isMobile ? "0.8rem" : "inherit"
+                      }}>
                         {currencySymbols[selectedCurrency]}{" "}
                         {convertAmount(row.interestPayment)}
                       </td>
-                      <td style={{ padding: "10px", border: "1px solid #ccc" }}>
+                      <td style={{ 
+                        padding: isMobile ? "6px" : "10px", 
+                        border: "1px solid #ccc",
+                        fontSize: isMobile ? "0.8rem" : "inherit"
+                      }}>
                         {currencySymbols[selectedCurrency]}{" "}
                         {convertAmount(row.balance)}
                       </td>
@@ -287,7 +354,7 @@ function Home() {
                 </tbody>
               </table>
             </Box>
-          </Box>
+          </Paper>
         )}
       </Container>
     </Box>
