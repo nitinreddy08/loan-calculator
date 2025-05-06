@@ -7,23 +7,26 @@
 ### Clone the Project:
 Clone the repository to your local machine using Git.
 
+```bash 
 git clone https://github.com/nitinreddy08/loan-calculator
+```
 
 
-Install Dependencies:
+### Install Dependencies:
 Go to the project folder and install the required packages.
-
+```bash 
 cd loan-emi-calculator
 npm install
+```
 
 
-Run the App Locally:
+### Run the App Locally:
 After installing the dependencies, start the app on your local machine.
-
+```bash 
 npm start
+```
 
-
-Deploy the App:
+### Deploy the App:
 To make the app available online, you can deploy it using Vercel.
 
 1.Connect the repository to Vercel.
