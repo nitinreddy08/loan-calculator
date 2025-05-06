@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, Button, Box, useTheme, useMediaQuery, Drawer, IconButton, BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { AppBar, Toolbar, Button, Box, useTheme, useMediaQuery, Drawer, IconButton} from "@mui/material";
+import { Link} from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,7 +13,6 @@ function Header() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [openDrawer, setOpenDrawer] = useState(false);
-  const location = useLocation();
 
   const handleDrawerToggle = () => {
     setOpenDrawer(!openDrawer);
@@ -24,13 +23,6 @@ function Header() {
     { name: "Exchange Rates", path: "/exchange-rates", icon: <CurrencyExchangeIcon /> },
     { name: "About", path: "/about", icon: <InfoIcon /> }
   ];
-
-  const getCurrentNavValue = () => {
-    const currentPath = location.pathname;
-    const foundItem = navItems.find(item => item.path === currentPath);
-    return foundItem ? navItems.indexOf(foundItem) : 0;
-  };
-
   return (
     <AppBar 
       position="sticky" 

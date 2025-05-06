@@ -23,7 +23,6 @@ function Home() {
   const { rates, loading, error } = useExchangeRates();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const currencySymbols = {
     USD: "$",
@@ -91,7 +90,7 @@ function Home() {
         color: "text.primary",
         minHeight: "100vh",
         padding: { xs: 2, sm: 3, md: 4 },
-        paddingBottom: isMobile ? '72px' : '32px', // Add bottom padding for mobile to account for navigation
+        paddingBottom: isMobile ? '72px' : '32px', 
       }}
     >
       <Container maxWidth="lg">
@@ -161,6 +160,7 @@ function Home() {
                 onClick={calculateEMI}
                 size={isMobile ? "medium" : "large"}
                 sx={{ mt: { xs: 1, md: 2 } }}
+                
               >
                 Calculate
               </Button>
@@ -268,7 +268,7 @@ function Home() {
                   borderCollapse: "separate",
                   borderSpacing: "0",
                   textAlign: "center",
-                  minWidth: isMobile ? "500px" : "100%", // Ensure horizontal scrolling works on mobile
+                  minWidth: isMobile ? "500px" : "100%",
                 }}
               >
                 <thead
@@ -299,17 +299,17 @@ function Home() {
                       style={{
                         backgroundColor:
                           index % 2 === 0
-                            ? "rgba(255, 255, 255, 0.08)" // Light gray for even rows in dark mode
-                            : "transparent", // Transparent for odd rows
+                            ? "rgba(255, 255, 255, 0.08)" 
+                            : "transparent", 
                         transition: "background-color 0.3s",
-                        color: "text.primary", // Adjust text color based on theme
+                        color: "text.primary",
                       }}
                       onMouseEnter={(e) => {
-                        // Adjust hover color for dark mode (lighter shade for hover)
-                        e.currentTarget.style.backgroundColor = "#1976d2"; // Blue hover effect
+                        
+                        e.currentTarget.style.backgroundColor = "#1976d2"; 
                       }}
                       onMouseLeave={(e) => {
-                        // Reset background color to original
+                        
                         e.currentTarget.style.backgroundColor =
                           index % 2 === 0
                             ? "rgba(255, 255, 255, 0.08)"

@@ -7,10 +7,11 @@ import {
   Card,
   CardContent,
   Grid,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/system";
+import { useTheme } from "@mui/material/styles";
 
-// Sample data about the user (you can replace with your own details)
 const userDetails = {
   name: "Nitin Reddy",
   title: "Software Developer",
@@ -39,84 +40,140 @@ const userDetails = {
   },
 };
 
-// Styling the avatar image
+
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: theme.spacing(12),
   height: theme.spacing(12),
-  marginBottom: theme.spacing(3),
+  marginBottom: theme.spacing(2),
+  [theme.breakpoints.down("sm")]: {
+    width: theme.spacing(10),
+    height: theme.spacing(10),
+  },
+}));
+
+const SkillChip = styled(Box)(({ theme }) => ({
+  display: "inline-block",
+  backgroundColor: theme.palette.primary.light,
+  color: theme.palette.primary.contrastText,
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(0.5, 1.5),
+  margin: theme.spacing(0.5),
+  fontSize: "0.9rem",
 }));
 
 function About() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   return (
     <Box
       sx={{
         bgcolor: "background.default",
         color: "text.primary",
         minHeight: "100vh",
-        padding: 4,
+        padding: { xs: 2, sm: 3, md: 4 },
       }}
     >
-      <Container>
-        <Typography variant="h3" gutterBottom align="center">
+      <Container maxWidth="lg">
+        <Typography 
+          variant={isMobile ? "h4" : "h3"} 
+          gutterBottom 
+          align="center" 
+          sx={{ mb: { xs: 3, md: 5 } }}
+        >
           About Me
         </Typography>
 
         <Grid container spacing={3} justifyContent="center">
+          
           <Grid
             item
             xs={12}
             md={4}
             sx={{
               display: "flex",
+              flexDirection: { xs: "column", sm: "row", md: "column" },
               alignItems: "center",
-              justifyContent: "center",
+              justifyContent: { xs: "center", sm: "flex-start", md: "center" },
+              mb: { xs: 2, md: 0 },
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <StyledAvatar alt={userDetails.name} src="/resumedp.jpg" />
-              <Box>
-                <Typography variant="h5">{userDetails.name}</Typography>
-                <Typography variant="h6">{userDetails.title}</Typography>
-              </Box>
+            <StyledAvatar alt={userDetails.name} src="/resumedp.jpg" />
+            <Box sx={{ 
+              textAlign: { xs: "center", sm: "left", md: "center" },
+              ml: { xs: 0, sm: 2, md: 0 }
+            }}>
+              <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: { xs: 1, sm: 0 } }}>
+                {userDetails.name}
+              </Typography>
+              <Typography variant={isMobile ? "subtitle1" : "h6"} color="textSecondary">
+                {userDetails.title}
+              </Typography>
             </Box>
           </Grid>
 
           <Grid item xs={12} md={8}>
-            <Card sx={{ p: 2 }}>
+            <Card sx={{ p: { xs: 1, sm: 2 } }} elevation={3}>
               <CardContent>
                 <Typography variant="body1" paragraph>
                   {userDetails.bio}
                 </Typography>
-                <Typography variant="h6">Skills:</Typography>
-                <ul>
+                
+                <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
+                  Skills:
+                </Typography>
+                <Box sx={{ 
+                  display: "flex", 
+                  flexWrap: "wrap", 
+                  gap: 0.5,
+                  mb: 2 
+                }}>
                   {userDetails.skills.map((skill, index) => (
-                    <li key={index}>{skill}</li>
+                    <SkillChip key={index}>{skill}</SkillChip>
                   ))}
-                </ul>
+                </Box>
 
-                <Typography variant="h6" sx={{ mt: 2 }}>
+                <Typography variant="h6" sx={{ mt: 3, mb: 1 }}>
                   Contact:
                 </Typography>
-                <Typography variant="body1">
-                  Email: {userDetails.contact.email}
-                </Typography>
-                <Typography variant="body1">
-                  Phone: {userDetails.contact.phone}
-                </Typography>
-                <Typography variant="body1">
-                  Location: {userDetails.contact.location}
-                </Typography>
+                <Box sx={{ pl: { xs: 0, sm: 1 } }}>
+                  <Typography variant="body1" sx={{ mb: 0.5 }}>
+                    Email: {userDetails.contact.email}
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 0.5 }}>
+                    Phone: {userDetails.contact.phone}
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 1 }}>
+                    Location: {userDetails.contact.location}
+                  </Typography>
 
-                <Typography variant="body1" sx={{ mt: 1 }}>
-                  <a href={userDetails.contact.linkedin} target="_blank" rel="noopener noreferrer">
-                    LinkedIn Profile
-                  </a>
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 1 }}>
-                  <a href={userDetails.contact.github} target="_blank" rel="noopener noreferrer">
-                    github Profile
-                  </a>
-                </Typography>
+                  <Box sx={{ 
+                    display: "flex", 
+                    flexDirection: { xs: "column", sm: "row" },
+                    gap: { xs: 1, sm: 3 },
+                    mt: 1 
+                  }}>
+                    <Typography variant="body1">
+                      <a 
+                        href={userDetails.contact.linkedin} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ color: theme.palette.primary.main }}
+                      >
+                        LinkedIn Profile
+                      </a>
+                    </Typography>
+                    <Typography variant="body1">
+                      <a 
+                        href={userDetails.contact.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style={{ color: theme.palette.primary.main }}
+                      >
+                        GitHub Profile
+                      </a>
+                    </Typography>
+                  </Box>
+                </Box>
               </CardContent>
             </Card>
           </Grid>
