@@ -29,17 +29,18 @@ const userDetails = {
     "Pandas",
     "Data Cleaning",
     "Data Visualization",
-    "SQL"
+    "SQL",
   ],
   contact: {
-    email: "prodvenkat@gmail.com",
+    email: "prodvenkat@gmail.com, nitinreddy.nv@gmail.com",
     phone: "+91 7382118118",
     location: "Hyderabad, India",
     linkedin: "https://www.linkedin.com/in/nitin-reddy-nv118",
     github: "https://github.com/nitinreddy08",
+    LiveProjectLink: "https://loan-calculator-nitin.vercel.app",
+    GithubRepositoryLink: "https://github.com/nitinreddy08/loan-calculator",
   },
 };
-
 
 const StyledAvatar = styled(Avatar)(({ theme }) => ({
   width: theme.spacing(12),
@@ -73,18 +74,39 @@ function About() {
         padding: { xs: 2, sm: 3, md: 4 },
       }}
     >
+      <Typography variant="body1">
+        Live Project Link :
+        <a
+          href={userDetails.contact.LiveProjectLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: theme.palette.primary.main }}
+        >
+          LiveProjectLink
+        </a>
+      </Typography>
+      <Typography variant="body1">
+        Github Repository Link :
+        <a
+          href={userDetails.contact.GithubRepositoryLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: theme.palette.primary.main }}
+        >
+          GithubRepositoryLink
+        </a>
+      </Typography>
       <Container maxWidth="lg">
-        <Typography 
-          variant={isMobile ? "h4" : "h3"} 
-          gutterBottom 
-          align="center" 
+        <Typography
+          variant={isMobile ? "h4" : "h3"}
+          gutterBottom
+          align="center"
           sx={{ mb: { xs: 3, md: 5 } }}
         >
           About Me
         </Typography>
 
         <Grid container spacing={3} justifyContent="center">
-          
           <Grid
             item
             xs={12}
@@ -98,14 +120,22 @@ function About() {
             }}
           >
             <StyledAvatar alt={userDetails.name} src="/resumedp.jpg" />
-            <Box sx={{ 
-              textAlign: { xs: "center", sm: "left", md: "center" },
-              ml: { xs: 0, sm: 2, md: 0 }
-            }}>
-              <Typography variant={isMobile ? "h5" : "h4"} sx={{ mt: { xs: 1, sm: 0 } }}>
+            <Box
+              sx={{
+                textAlign: { xs: "center", sm: "left", md: "center" },
+                ml: { xs: 0, sm: 2, md: 0 },
+              }}
+            >
+              <Typography
+                variant={isMobile ? "h5" : "h4"}
+                sx={{ mt: { xs: 1, sm: 0 } }}
+              >
                 {userDetails.name}
               </Typography>
-              <Typography variant={isMobile ? "subtitle1" : "h6"} color="textSecondary">
+              <Typography
+                variant={isMobile ? "subtitle1" : "h6"}
+                color="textSecondary"
+              >
                 {userDetails.title}
               </Typography>
             </Box>
@@ -117,16 +147,18 @@ function About() {
                 <Typography variant="body1" paragraph>
                   {userDetails.bio}
                 </Typography>
-                
+
                 <Typography variant="h6" sx={{ mt: 2, mb: 1 }}>
                   Skills:
                 </Typography>
-                <Box sx={{ 
-                  display: "flex", 
-                  flexWrap: "wrap", 
-                  gap: 0.5,
-                  mb: 2 
-                }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 0.5,
+                    mb: 2,
+                  }}
+                >
                   {userDetails.skills.map((skill, index) => (
                     <SkillChip key={index}>{skill}</SkillChip>
                   ))}
@@ -146,16 +178,18 @@ function About() {
                     Location: {userDetails.contact.location}
                   </Typography>
 
-                  <Box sx={{ 
-                    display: "flex", 
-                    flexDirection: { xs: "column", sm: "row" },
-                    gap: { xs: 1, sm: 3 },
-                    mt: 1 
-                  }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", sm: "row" },
+                      gap: { xs: 1, sm: 3 },
+                      mt: 1,
+                    }}
+                  >
                     <Typography variant="body1">
-                      <a 
-                        href={userDetails.contact.linkedin} 
-                        target="_blank" 
+                      <a
+                        href={userDetails.contact.linkedin}
+                        target="_blank"
                         rel="noopener noreferrer"
                         style={{ color: theme.palette.primary.main }}
                       >
@@ -163,9 +197,9 @@ function About() {
                       </a>
                     </Typography>
                     <Typography variant="body1">
-                      <a 
-                        href={userDetails.contact.github} 
-                        target="_blank" 
+                      <a
+                        href={userDetails.contact.github}
+                        target="_blank"
                         rel="noopener noreferrer"
                         style={{ color: theme.palette.primary.main }}
                       >
